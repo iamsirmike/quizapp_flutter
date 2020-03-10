@@ -38,6 +38,14 @@ class _QuizPageState extends State<QuizPage> {
   int wrong = 0;
   List<Icon> scoreKeeper = [];
 
+  //reset
+  void reset() {
+    questionNum = 0;
+    scoreKeeper = [];
+    correct = 0;
+    wrong = 0;
+  }
+
   //check answer when user picks true or false
   void userPicked(bool userAnswer) {
     bool correctAnswer = quizBrain.questions[questionNum].questionAnswer;
@@ -45,11 +53,11 @@ class _QuizPageState extends State<QuizPage> {
       if (questionNum == quizBrain.questions.length - 1) {
         Alert(
                 context: context,
-                title: "You had $correct correct and $wrong wrong",
+                title: "You had $correct correct(s) and $wrong wrong(s)",
                 desc: "questions will be reset")
             .show();
-        questionNum = 0;
-        scoreKeeper = [];
+        //reset
+        reset();
       } else {
         if (correctAnswer == userAnswer) {
           correct++;
